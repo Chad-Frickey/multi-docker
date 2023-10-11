@@ -13,3 +13,10 @@ after_success:
   - docker build -t chadftest/multi-nginx ./nginx
   - docker build -t chadftest/multi-server ./server
   - docker build -t chadftest/multi-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push chadftest/multi-client
+  - docker push chadftest/multi-nginx
+  - docker push chadftest/multi-server
+  - docker push chadftest/multi-worker
