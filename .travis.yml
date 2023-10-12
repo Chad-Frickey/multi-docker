@@ -20,3 +20,15 @@ after_success:
   - docker push chadftest/multi-nginx
   - docker push chadftest/multi-server
   - docker push chadftest/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: multi-test
+  env: Multi-test-env
+  bucket_name: elasticbeanstalk-us-east-2-234409112385
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
